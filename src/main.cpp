@@ -25,15 +25,18 @@ uint64_t readings_timer = 0;
 void setup() {
   Serial.begin(serial_speed);
   #ifdef DEBUG_MODE
+    delay(2000);
     debug_init();
   #endif
   #ifdef SHARP_GP2Y0A21YK0F
-    if(analogRead(GP2Y0A21YK0F_pin) == 0){
+    pinMode(GP2Y0A21YK0F_pin,INPUT);
+    if(analogRead(GP2Y0A21YK0F_pin) < 600){
       Serial.println(F("ERROR - Sensor GP2Y0A21YK0F is not connected! Check the connection or change the pin in config!"));
     }
   #endif
   #ifdef SHARP_GP2Y0A710K0F
-    if(analogRead(GP2Y0A710K0F_pin) == 0){
+    pinMode(GP2Y0A710K0F_pin,INPUT);
+    if(analogRead(GP2Y0A710K0F_pin) < 600){
       Serial.println(F("ERROR - Sensor GP2Y0A710K0F is not connected! Check the connection or change the pin in config!"));
     }
   #endif
