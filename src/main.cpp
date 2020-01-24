@@ -87,22 +87,26 @@ void debug_print(){
 }
 
 void print(){
-  if(distance_cm_1080 != 0){
-    #ifdef Serial_as_serial
-      Serial.print(distance_cm_1080);
-      Serial.print(";");
-    #endif
-    #ifdef Serial_as_rows
-      Serial.println(distance_cm_1080);
-    #endif
-  }
-  else {
-    #ifdef Serial_as_serial
-      Serial.print(distance_cm_100500);
-      Serial.print(";");
-    #endif
-    #ifdef Serial_as_rows
-      Serial.println(distance_cm_100500);
-    #endif
-  }
+  #ifdef SHARP_GP2Y0A21YK0F
+    if(distance_cm_1080 != 0){
+      #ifdef Serial_as_serial
+        Serial.print(distance_cm_1080);
+        Serial.print(";");
+      #endif
+      #ifdef Serial_as_rows
+        Serial.println(distance_cm_1080);
+      #endif
+    }
+  #endif
+  #ifdef SHARP_GP2Y0A710K0F
+    else {
+      #ifdef Serial_as_serial
+        Serial.print(distance_cm_100500);
+        Serial.print(";");
+      #endif
+      #ifdef Serial_as_rows
+        Serial.println(distance_cm_100500);
+      #endif
+    }
+  #endif
 }
