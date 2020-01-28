@@ -13,10 +13,10 @@ int distance_cm_100500;
   GP2YA41SK0F --> 430
 */
 #ifdef SHARP_GP2Y0A21YK0F
-    SharpIR IRsensor_close = SharpIR(GP2Y0A21YK0F_pin, 1080);
+    SharpIR IRsensor_close(SharpIR::GP2Y0A21YK0F, GP2Y0A21YK0F_pin);
 #endif
 #ifdef SHARP_GP2Y0A710K0F
-    SharpIR IRsensor_far = SharpIR(GP2Y0A710K0F_pin, 100500);
+    SharpIR IRsensor_far(SharpIR::GP2Y0A710K0F, GP2Y0A710K0F_pin);
 #endif
 
 uint64_t readings_timer = 0;
@@ -30,13 +30,13 @@ void setup() {
   #endif
   #ifdef SHARP_GP2Y0A21YK0F
     pinMode(GP2Y0A21YK0F_pin,INPUT);
-    if(analogRead(GP2Y0A21YK0F_pin) < 600){
+    if(analogRead(GP2Y0A21YK0F_pin) > 200){
       Serial.println(F("ERROR - Sensor GP2Y0A21YK0F is not connected! Check the connection or change the pin in config!"));
     }
   #endif
   #ifdef SHARP_GP2Y0A710K0F
     pinMode(GP2Y0A710K0F_pin,INPUT);
-    if(analogRead(GP2Y0A710K0F_pin) < 600){
+    if(analogRead(GP2Y0A710K0F_pin) > 200){
       Serial.println(F("ERROR - Sensor GP2Y0A710K0F is not connected! Check the connection or change the pin in config!"));
     }
   #endif
@@ -47,8 +47,8 @@ void loop() {
   #ifdef SHARP_GP2Y0A21YK0F
     distance_cm_1080 = IRsensor_close.getDistance();
   #endif
-  #ifdef SHARP_GP2Y0A21YK0F
-    distance_cm_100500 = IRsensor_close.getDistance();
+  #ifdef SHARP_GP2Y0A710K0F
+    distance_cm_100500 = IRsensor_far.getDistance();
   #endif
   if(readings_timer + send_every_seconds < millis()){
     #ifdef DEBUG_MODE
@@ -81,11 +81,23 @@ void debug_print(){
     Serial.print("GP2Y0A21YK0F - Mean distance: ");
     Serial.print(distance_cm_1080);
     Serial.println(" cm");
+    #ifdef DEBUG_PRINT_PIN_SENSE
+      Serial.print(F("Voltage measured on pin "));
+      Serial.print(GP2Y0A21YK0F_pin);
+      Serial.print(F(": "));
+      Serial.println(analogRead(GP2Y0A21YK0F_pin));
+    #endif
   #endif
   #ifdef SHARP_GP2Y0A710K0F
     Serial.print("GP2Y0A710K0F - Mean distance: ");
     Serial.print(distance_cm_100500);
     Serial.println(" cm");
+    #ifdef DEBUG_PRINT_PIN_SENSE
+      Serial.print(F("Voltage measured on pin "));
+      Serial.print(GP2Y0A710K0F_pin);
+      Serial.print(F(": "));
+      Serial.println(analogRead(GP2Y0A710K0F_pin));
+    #endif
   #endif
 }
 

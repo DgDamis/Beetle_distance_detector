@@ -3,8 +3,8 @@
     // Code configuration
     // Comment or uncomment to choose attached sensors
  //********************************************************************
-#define DEBUG_MODE          // Uncomment to get extended debugging messages via serial line
-
+//#define DEBUG_MODE            // Uncomment to get extended debugging messages via serial line
+//#define DEBUG_PRINT_PIN_SENSE    // Uncomment to get additional debug info of pin measurements
 
 // Attached devices
    // When uncommenting, uncomment sensor model number and appropriate pin
@@ -20,7 +20,7 @@
 #define Serial_as_serial    
 //#define Serial_as_rows
 int constexpr serial_speed = 9600;          // Set serial communication speed
-int constexpr send_every_seconds = 2000;    // Set the delay for the communication
+int constexpr send_every_seconds = 1000;    // Set the delay for the communication
 
 void loop();
 void setup();
