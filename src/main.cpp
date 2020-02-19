@@ -16,7 +16,8 @@ int distance_cm_100500;
     SharpIR IRsensor_close(SharpIR::GP2Y0A21YK0F, GP2Y0A21YK0F_pin);
 #endif
 #ifdef SHARP_GP2Y0A710K0F
-    SharpIR IRsensor_far(SharpIR::GP2Y0A710K0F, GP2Y0A710K0F_pin);
+    //! Does not work
+     //! SharpIR IRsensor_far(SharpIR::GP2Y0A710K0F, GP2Y0A710K0F_pin);
 #endif
 
 uint64_t readings_timer = 0;
