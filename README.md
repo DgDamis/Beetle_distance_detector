@@ -7,9 +7,9 @@ This code has been built for a usage with microchip Beetle based on Arduino Leon
 <b> In theory it should work on any board </b> as long as you change the board settings in platformio.ini and it successfuly compiles.
 
 <h3>Supported sensors:</h3> 
-    - Sharp GP2Y0A21YK0F
-    - Sharp GP2Y0A710K0F
+    <p> - Sharp GP2Y0A21YK0F </p>
+    <p> - Sharp GP2Y0A710K0F </p>
 <h4>Supported configuration (you need to specify in config.cpp file):</h4>
-    - One sensor at the time
-    - or both sensors simultaneously
+    <p> - One sensor at the time </p>
+    <p> - or both sensors simultaneously </p>
 
