@@ -3,6 +3,7 @@
 
 // Include the library:
 #include <SharpIR.h>
+#include <SharpDistSensor.h>
 // Create variable to store the distance:
 int distance_cm_1080;
 int distance_cm_100500;
@@ -18,6 +19,7 @@ int distance_cm_100500;
 #ifdef SHARP_GP2Y0A710K0F
     //! Does not work
      //! SharpIR IRsensor_far(SharpIR::GP2Y0A710K0F, GP2Y0A710K0F_pin);
+     SharpDistSensor IRsensor_far(GP2Y0A710K0F_pin, medianFilterWindowSize);
 #endif
 
 uint64_t readings_timer = 0;
@@ -40,6 +42,7 @@ void setup() {
     if(analogRead(GP2Y0A710K0F_pin) > 200){
       Serial.println(F("ERROR - Sensor GP2Y0A710K0F is not connected! Check the connection or change the pin in config!"));
     }
+    IRsensor_far.setModel(SharpDistSensor::GP2Y0A710K0F_5V_DS);
   #endif
 }
 
@@ -49,7 +52,7 @@ void loop() {
     distance_cm_1080 = IRsensor_close.getDistance();
   #endif
   #ifdef SHARP_GP2Y0A710K0F
-    distance_cm_100500 = IRsensor_far.getDistance();
+    distance_cm_100500 = IRsensor_far.getDist();
   #endif
   if(readings_timer + send_every_seconds < millis()){
     #ifdef DEBUG_MODE

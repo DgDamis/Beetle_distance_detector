@@ -2,24 +2,31 @@
  //********************************************************************
     // Code configuration
     // Comment or uncomment to choose attached sensors
+    // or to activate additional features
  //********************************************************************
+
 //#define DEBUG_MODE            // Uncomment to get extended debugging messages via serial line
 //#define DEBUG_PRINT_PIN_SENSE    // Uncomment to get additional debug info of pin measurements
 
 // Attached devices
    // When uncommenting, uncomment sensor model number and appropriate pin
       // First device
-         #define SHARP_GP2Y0A21YK0F        // Sharp GP2Y0A21YK0F analogue distance sensor - 0 to 80 cm
+         #define SHARP_GP2Y0A21YK0F          // Sharp GP2Y0A21YK0F analogue distance sensor - 0 to 80 cm
          int constexpr GP2Y0A21YK0F_pin = A0;
       // Second device
-         //! does not work
-         //! #define SHARP_GP2Y0A710K0F        // Sharp GP2Y0A710K0F analogue distance sensor - 1 to 5 m
-         int constexpr GP2Y0A710K0F_pin = A1;
+         //! Untested
+         //#define SHARP_GP2Y0A710K0F        // Sharp GP2Y0A710K0F analogue distance sensor - 1 to 5 m
+         byte constexpr GP2Y0A710K0F_pin = A1;
 
+// Media filtering settings, applies only to the later of the sensors
+   // Window size of the median filter (odd number, 1 = no filtering, 5 = default)
+      // Window Size / avg processing time [us]: 5  / 22; 7  / 30; 9  / 40; 11 / 49; 21 / 99
+         constexpr byte medianFilterWindowSize = 5;
 
 // Uncomment only one of the serial communication specifiers
 #define Serial_as_serial    
 //#define Serial_as_rows
+
 int constexpr serial_speed = 9600;          // Set serial communication speed
 int constexpr send_every_seconds = 1000;    // Set the delay for the communication
 
