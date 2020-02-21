@@ -107,24 +107,32 @@ void debug_print(){
 
 void print(){
   #ifdef SHARP_GP2Y0A21YK0F
-    if(distance_cm_1080 != 0){
-      #ifdef Serial_as_serial
-        Serial.print(distance_cm_1080);
-        Serial.print(";");
-      #endif
-      #ifdef Serial_as_rows
-        Serial.println(distance_cm_1080);
-      #endif
-    }
+    #ifdef SHARP_GP2Y0A710K0F
+      if(distance_cm_1080 > 0 && distance_cm_100500 < 110){
+    #else
+      if(distance_cm_1080 > 0){
+    #endif
+        #ifdef Serial_as_serial
+          Serial.print((distance_cm_1080 <= 10)? 10 : distance_cm_1080);
+          Serial.print(";");
+        #endif
+        #ifdef Serial_as_rows
+          Serial.println((distance_cm_1080 <= 10)? 10 : distance_cm_1080);
+        #endif
+      }
   #endif
   #ifdef SHARP_GP2Y0A710K0F
     else {
       #ifdef Serial_as_serial
+      //TODO if(distance_cm_100500 > 110){
         Serial.print(distance_cm_100500);
         Serial.print(";");
+      //TODO } 
       #endif
       #ifdef Serial_as_rows
+        //TODO if(distance_cm_100500 > 110){
         Serial.println(distance_cm_100500);
+        //TODO }
       #endif
     }
   #endif
